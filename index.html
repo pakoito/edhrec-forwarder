@@ -14,7 +14,8 @@
   <footer>
     <p>For <a href="https://edhrec.com/">EDHREC</a></p>
     <p>Add it as a search engine in your browser
-      using <a href="TBD">Mycroft
+      using <a
+        href="https://mycroftproject.com/install.html?id=123358&basename=edhrec-forwarder&icontype=png&name=EDHREC+Forwarder">Mycroft
         Project</a></p>
     <p>By @pacoworks</p>
     <button style="color: rgb(0, 0, 0);" onclick="history.back()">
@@ -28,7 +29,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const q = urlParams.get('q');
     if (!q) {
-      message.innerText = "Please set a query parameter such as ?q=krenko";
+      message.innerText = "Please set a query parameter such as ?q=terminate";
     } else {
       fetch(`https://edhrec.com/api/typeahead?q=${q}`, {
         method: "GET"
