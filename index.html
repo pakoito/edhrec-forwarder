@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>EDHREC Forwarder</title>
+</head>
+
+<body style="text-align: center;" style="color: rgb(255, 255, 255);">
+
+  <h2 style="color: rgb(0, 0, 0);" id="message">
+    Opening...
+  </h2>
+
+  <footer>
+    <p>For <a href="https://edhrec.com/">EDHREC</a></p>
+    <p>Add it as a search engine in your browser
+      using <a href="TBD">Mycroft
+        Project</a></p>
+    <p>By @pacoworks</p>
+    <button style="color: rgb(0, 0, 0);" onclick="history.back()">
+      Back
+    </button>
+  </footer>
+
+  <script>
+    const message = document.getElementById("message");
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const q = urlParams.get('q');
+    if (!q) {
+      message.innerText = "Please set a query parameter such as ?q=krenko";
+    } else {
+      fetch(`https://edhrec.com/api/typeahead?q=${q}`, {
+        method: "GET"
+      })
+        .then(response => response.json()).then(data => {
+          console.log(data);
+
+          if (data.length === 0) {
+            message.innerText = "No results found for: " + q;
+            return;
+          }
+
+          const target = data[0].url;
+          const targetUrl = 'https://edhrec.com/' + target;
+          message.innerHTML = `Forwarding to: <a id="link" href=${targetUrl}>${q}</a>`;
+          window.location.assign(targetUrl);
+        });
+    }
+  </script>
+
+</body>
