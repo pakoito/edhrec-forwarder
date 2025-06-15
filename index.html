@@ -45,8 +45,9 @@
           }
 
           const target = data[0].url;
+          const name = data[0].label;
           const targetUrl = 'https://edhrec.com/' + target;
-          message.innerHTML = `Forwarding to: <a id="link" href=${targetUrl}>${q}</a>`;
+          message.innerHTML = `Forwarding to: <a id="link" href=${targetUrl}>${name}</a>`;
           window.location.assign(targetUrl);
         });
     }
